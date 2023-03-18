@@ -1,11 +1,11 @@
 type FillStrokeStyle = string | CanvasGradient | CanvasPattern
 
-type MoveTo = { step: 'move-to', x: number, y: number }
-type LineTo = { step: 'line-to', x: number, y: number }
-type Arc = { step: 'arc', x: number, y: number, radius: number, startAngle: number, endAngle: number, clockwise?: boolean }
-type ArcTo = { step: 'arc-to', x1: number, y1: number, x2: number, y2: number, radius: number }
+type MoveTo         = { step: 'move-to', x: number, y: number }
+type LineTo         = { step: 'line-to', x: number, y: number }
+type Arc            = { step: 'arc', x: number, y: number, radius: number, startAngle: number, endAngle: number, clockwise?: boolean }
+type ArcTo          = { step: 'arc-to', x1: number, y1: number, x2: number, y2: number, radius: number }
 type BeziereCurveTo = { step: 'beziere-curve-to', cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number }
-type ClosePath = { step: 'close' }
+type ClosePath      = { step: 'close' }
 
 type DrawInstruction = MoveTo | LineTo | Arc | ArcTo | BeziereCurveTo | ClosePath
 
@@ -31,18 +31,24 @@ function drawSegment(ctx: CanvasRenderingContext2D, key: DrawInstruction) {
   }
 }
 
+export function drawPath (ctx: CanvasRenderingContext2D, pathInstructionSet: DrawInstruction[]) {
+  ctx.beginPath()
+  pathInstructionSet.forEach(
+    instruction => drawSegment(ctx, instruction)
+  )
+}
+
 
 export function fillPath (ctx: CanvasRenderingContext2D, fillStyle: FillStrokeStyle, pathInstructionSet: DrawInstruction[]) {
-  ctx.save()
+  ctx.save();
 
-  ctx.fillStyle = fillStyle
+  ctx.fillStyle = fillStyle;
 
-  ctx.beginPath()
-  pathInstructionSet.forEach(instruction => drawSegment(ctx, instruction))
+  drawPath(ctx, pathInstructionSet);
 
-  ctx.fill()
+  ctx.fill();
 
-  ctx.restore()
+  ctx.restore();
 }
 
 
@@ -51,8 +57,7 @@ export function strokePath (ctx: CanvasRenderingContext2D, strokeStyle: FillStro
 
   ctx.strokeStyle = strokeStyle
 
-  ctx.beginPath()
-  pathInstructionSet.forEach(instruction => drawSegment(ctx, instruction))
+  drawPath(ctx, pathInstructionSet);
 
   ctx.stroke()
 
