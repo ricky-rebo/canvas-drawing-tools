@@ -12,6 +12,7 @@ export function createCanvas (width: number, height: number = width) {
   return buffer;
 }
 
+
 /**
  * Obtains the canvas context by passing the canvas element, o its ID.
  * @param elementOrId canvas element itself, or its ID
@@ -30,4 +31,25 @@ export function getCanvasContext (elementOrId: HTMLCanvasElement | string) {
   }
 
   return ctx;
+}
+
+
+export function drawToCanvas (width: number, height: number, drawFunction: (ctx: CanvasRenderingContext2D) => void) {
+  const canvas = createCanvas(width, height)
+  const ctx = canvas.getContext('2d')
+
+  if (!ctx) {
+    throw Error("Unable to get canvas context!")
+  }
+
+  drawFunction(ctx)
+
+  return canvas
+}
+
+
+export function rotateContext (ctx: CanvasRenderingContext2D, angle: number, centerX = ctx.canvas.width/2, centerY = ctx.canvas.height/2) {
+  ctx.translate(centerX, centerY)
+  ctx.rotate(angle)
+  ctx.translate(-centerX, -centerY)
 }

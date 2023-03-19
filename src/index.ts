@@ -1,6 +1,8 @@
 export {
   createCanvas,
+  drawToCanvas,
   getCanvasContext,
+  rotateContext,
 } from "./common";
 
 export {
