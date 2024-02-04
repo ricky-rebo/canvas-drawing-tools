@@ -1,3 +1,5 @@
+import { drawToCanvas } from "./common";
+
 type ColorStop = { offset: number, color: string }
 
 /**
@@ -38,6 +40,24 @@ export function createRadialGradient (ctx: CanvasRenderingContext2D, x: number, 
   });
 
   return gradient;
+}
+
+/**
+ * Retrieve color data in RGBA order from a color string
+ * @param color A valid CSS color string
+ * @returns Returns the one-dimensional array containing the data in RGBA order, as integers in the range 0 to 255.
+ */
+export function getColorValues(color: string): [number, number, number, number] {
+  const lookupBuffer = drawToCanvas(1, 1, function (ctx) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.rect(0, 0, 1, 1);
+    ctx.fill();
+  });
+
+  const colorData = lookupBuffer.getContext("2d")!.getImageData(0, 0, 2, 2).data;
+
+  return [colorData[0], colorData[1], colorData[2], colorData[3]];
 }
 
 export function rgbToHsl (red: number, green: number, blue: number): [number, number, number] {

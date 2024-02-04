@@ -8,6 +8,7 @@ export {
 export {
   createLinearGradient,
   createRadialGradient,
+  getColorValues,
   rgbToHsl,
   rgbToHsb,
   hsbToRgb,
