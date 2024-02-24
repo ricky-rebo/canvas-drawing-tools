@@ -15,8 +15,8 @@ export {
   hexToRgb,
 } from "./colors";
 
-export {
-  drawPath,
-  fillPath,
-  strokePath,
-} from "./paths";
+// export {
+//   drawPath,
+//   fillPath,
+//   strokePath,
+// } from "./paths";

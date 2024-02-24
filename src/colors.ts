@@ -60,6 +60,13 @@ export function getColorValues(color: string): [number, number, number, number] 
   return [colorData[0], colorData[1], colorData[2], colorData[3]];
 }
 
+/**
+ * Convert a color from RGB to HSL
+ * @param red Red value [0-255]
+ * @param green Green value [0-255]
+ * @param blue Blue color values [0-255]
+ * @returns HSL color values
+ */
 export function rgbToHsl (red: number, green: number, blue: number): [number, number, number] {
   red /= 255
   green /= 255
@@ -93,6 +100,13 @@ export function rgbToHsl (red: number, green: number, blue: number): [number, nu
   return [hue, saturation, lightness]
 }
 
+/**
+ * Convert a color from RGB to HSB
+ * @param red Red value [0-255]
+ * @param green Green value [0-255]
+ * @param blue Blue color values [0-255]
+ * @returns HSB color values
+ */
 export function rgbToHsb (red: number, green: number, blue: number): [number, number, number] {
   red = red / 255
   green = green / 255
@@ -122,6 +136,13 @@ export function rgbToHsb (red: number, green: number, blue: number): [number, nu
   return [hue, saturation, brightness]
 }
 
+/**
+ * Convert a color from HSB to RGB
+ * @param hue Hue value
+ * @param saturation Saturation value
+ * @param brightness Brightness value
+ * @returns RGB color values
+ */
 export function hsbToRgb (hue: number, saturation: number, brightness: number): [number, number, number] {
   let r = 0;
   let g = 0;
@@ -169,8 +190,13 @@ export function hsbToRgb (hue: number, saturation: number, brightness: number): 
   return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)]
 }
 
+/**
+ * Convert a color from HEX to RGB
+ * @param hex HEX color string
+ * @returns RGB color values
+ */
 export function hexToRgb (hex: string): [number, number, number] {
-  hex = hex.charAt(0) === "#" ? hex.substring(1, 7) : hex
+  hex = hex.startsWith("#") ? hex.substring(1, 7) : hex
 
   return [
     parseInt(hex.substring(0, 2), 16), // red

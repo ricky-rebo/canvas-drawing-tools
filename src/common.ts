@@ -2,7 +2,7 @@
  * Creates an HTML Canvas Element.
  * @param width canvas width
  * @param height canvas height (default: equal to `width`)
- * @returns {HTMLCanvasElement}
+ * @returns A newly created HTML canvas
  */
 export function createCanvas (width: number, height: number = width) {
   const buffer = document.createElement('canvas');
@@ -33,7 +33,13 @@ export function getCanvasContext (elementOrId: HTMLCanvasElement | string) {
   return ctx;
 }
 
-
+/**
+ * Creates a canvas and draw into it
+ * @param width Canvas width
+ * @param height Canvas height
+ * @param drawFunction Draw callback
+ * @returns The resulting canvas
+ */
 export function drawToCanvas (width: number, height: number, drawFunction: (ctx: CanvasRenderingContext2D) => void) {
   const canvas = createCanvas(width, height)
   const ctx = canvas.getContext('2d')
@@ -47,7 +53,13 @@ export function drawToCanvas (width: number, height: number, drawFunction: (ctx:
   return canvas
 }
 
-
+/**
+ * Rotates a contex around its center
+ * @param ctx Contect to rotate
+ * @param angle Rotation angle
+ * @param centerX Rotation center X
+ * @param centerY Rotation center Y
+ */
 export function rotateContext (ctx: CanvasRenderingContext2D, angle: number, centerX = ctx.canvas.width/2, centerY = ctx.canvas.height/2) {
   ctx.translate(centerX, centerY)
   ctx.rotate(angle)
