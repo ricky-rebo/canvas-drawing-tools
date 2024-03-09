@@ -1,14 +1,13 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "canvas-drawing-tools",
   "author": "Riccardo Rebottini",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "main": "dist/index.js",
   "module": "dist/canvas-drawing-tools.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "start": "dts watch",
@@ -24,7 +23,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "dts lint"
     }
   },
   "prettier": {
